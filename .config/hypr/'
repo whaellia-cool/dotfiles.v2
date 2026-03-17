@@ -1,0 +1,282 @@
+# https://wiki.hypr.land/Configuring/
+
+# See https://wiki.hypr.land/Configuring/Monitors/
+env= GDK_SCALE,1
+monitor=,preferred,auto,1.2
+
+# Resolution fix for steam and non-native wayland apps
+xwayland {
+ force_zero_scaling = true
+}
+
+# NVIDIA things
+env = NVD_BACKEND,direct
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+
+$terminal = kitty
+$fileManager = thunar
+$menu = wofi
+
+exec-once = waybar
+exec-once = swww-daemon
+exec-once = hypridle
+#exec-once = hyprpolkitagent
+#exec-once = hyprlock
+exec-once = paplay ~/.config/hypr/sounds/login.oga
+
+env = XCURSOR_SIZE,24
+env = HYPRCURSOR_SIZE,24
+env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+
+general {
+    gaps_in = 2
+    gaps_out = 5
+
+    border_size = 1
+
+    # https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
+    col.active_border = rgba(edeadeee)
+    col.inactive_border = rgba(595959aa)
+    
+    # Set to true enable resizing windows by clicking and dragging on borders and gaps
+    resize_on_border = true
+
+    # Please see https://wiki.hypr.land/Configuring/Tearing/ before you turn this on
+    allow_tearing = false
+
+    layout = scrolling
+}
+
+# https://wiki.hypr.land/Configuring/Variables/#decoration
+decoration {
+    rounding = 10
+    rounding_power = 1 
+
+    # Change transparency of focused and unfocused windows
+    active_opacity = 1.0
+    inactive_opacity = 1.0
+    
+    dim_inactive = true
+    dim_strength = 0.3
+
+    shadow {
+        enabled = true
+        range = 4
+        render_power = 3
+        color = rgba(1a1a1aee)
+    }
+
+    # https://wiki.hypr.land/Configuring/Variables/#blur
+    blur {
+        enabled = true
+        size = 2
+        passes = 3
+        ignore_opacity = true
+        new_optimizations = true
+        vibrancy = 0.196
+        brightness = 1
+        xray = false
+        contrast = 1.1
+        xray = true
+    }
+}
+
+animations {
+    enabled = true
+    bezier = linear, 0, 0, 1, 1
+    bezier = md3_standard, 0.2, 0, 0, 1
+    bezier = md3_decel, 0.05, 0.7, 0.1, 1
+    bezier = md3_accel, 0.3, 0, 0.8, 0.15
+    bezier = overshot, 0.05, 0.9, 0.1, 1.1
+    bezier = crazyshot, 0.1, 1.5, 0.76, 0.92 
+    bezier = hyprnostretch, 0.05, 0.9, 0.1, 1.0
+    bezier = fluent_decel, 0.1, 1, 0, 1
+    bezier = easeInOutCirc, 0.85, 0, 0.15, 1
+    bezier = easeOutCirc, 0, 0.55, 0.45, 1
+    bezier = easeOutExpo, 0.16, 1, 0.3, 1
+    animation = windows, 1, 3, md3_decel, popin 60%
+    animation = border, 1, 10, default
+    animation = fade, 1, 2.5, md3_decel
+    animation = workspaces, 1, 3.5, easeOutExpo, slide
+    animation = specialWorkspace, 1, 2, md3_decel, slidevert
+  }
+
+dwindle {
+    pseudotile = true    
+    preserve_split = true 
+}
+
+master {
+    new_status = master
+}
+
+scrolling {
+
+}
+
+#############
+### INPUT ###
+#############
+
+input {
+    kb_layout = us,ru
+    kb_variant =
+    kb_model =
+    kb_options = grp:shifts_toggle,grp:caps_switch
+    kb_rules =
+
+    follow_mouse = 1
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+
+    touchpad {
+        natural_scroll = false
+    }
+}
+
+# See https://wiki.hypr.land/Configuring/Gestures
+gesture = 3, horizontal, workspace
+
+# Example per-device config
+# See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
+device {
+    name = epic-mouse-v1
+    sensitivity = -0.5
+}
+
+
+###################
+### KEYBINDINGS ###
+###################
+
+# See https://wiki.hypr.land/Configuring/Keywords/
+$mainMod = SUPER # Sets "Windows" key as main modifier
+
+bindr = SUPER, SUPER_L, exec, killall wofi || wofi
+# Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
+# bindr = $mainMod, SUPER_L, exec, wofi --show drun
+bind = $mainMod, B, exec, firefox
+
+bind = $mainMod, Q, exec, $terminal
+bind = $mainMod, RETURN, exec, $terminal
+bind = $mainMod, W, killactive,
+# bind = $mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
+bind = $mainMod, E, exec, $fileManager
+bind = $mainMod SHIFT, W, exec, $terminal impala
+bind = $mainMod SHIFT, B, exec, $terminal bluetui
+bind = $mainMod SHIFT, M, exec, $terminal wiremix
+bind = $mainMod SHIFT, I, exec, hyprpicker --autocopy
+bind = $mainMod, T, togglefloating,
+bind = $mainMod, P, pseudo
+bind = $mainMod, J, layoutmsg, cyclenext 
+bind = $mainMod, S, exec, ~/.config/hypr/scripts/hyprshot.sh
+bind = $mainMod, L, exec, pactl set-sink-mute @DEFAULT_SINK@ 1 && hyprlock
+bind = $mainMod, K, exec, killall waybar && waybar &
+
+# Move focus with mainMod + arrow keys
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+bind = ALT, Tab, cyclenext
+
+# Scrolling things
+bind = $mainMod, period, layoutmsg, move +col
+bind = $mainMod, comma, layoutmsg, move -col
+
+# Switch workspaces with mainMod + [0-9]
+bind = $mainMod, 1, workspace, 1
+bind = $mainMod, 2, workspace, 2
+bind = $mainMod, 3, workspace, 3
+bind = $mainMod, 4, workspace, 4
+bind = $mainMod, 5, workspace, 5
+bind = $mainMod, 6, workspace, 6
+bind = $mainMod, 7, workspace, 7
+bind = $mainMod, 8, workspace, 8
+bind = $mainMod, 9, workspace, 9
+bind = $mainMod, 0, workspace, 10
+
+# Move active window to a workspace with mainMod + SHIFT + [0-9]
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+# Example special workspace (scratchpad)
+bind = $mainMod SHIFT, S, togglespecialworkspace, magic
+bind = $mainMod ALT, S, movetoworkspace, special:magic
+
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+
+# Laptop multimedia keys for volume and LCD brightness
+#bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+#bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+bindel = ,XF86AudioRaiseVolume, exec, sh -c "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+; paplay ~/.config/hypr/sounds/volume-change.oga"
+bindel = ,XF86AudioLowerVolume, exec, sh -c "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-; paplay ~/.config/hypr/sounds/volume-change.oga"
+bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+binde = , XF86MonBrightnessUp, exec, brightnessctl set +5%
+binde = , XF86MonBrightnessDown, exec, brightnessctl set 5%
+
+# Requires playerctl
+bindl = , XF86AudioNext, exec, playerctl next
+bindl = , XF86AudioPause, exec, playerctl play-pause
+bindl = , XF86AudioPlay, exec, playerctl play-pause
+bindl = , XF86AudioPrev, exec, playerctl previous
+
+# Chanage wallpaper
+bind = SUPER CTRL, Space, exec, ~/.config/hypr/scripts/cycle_wallpapers.sh
+
+##############################
+### WINDOWS AND WORKSPACES ###
+##############################
+
+# See https://wiki.hypr.land/Configuring/Window-Rules/ for more
+# See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
+
+# Example windowrules that are useful
+
+windowrule {
+    # Ignore maximize requests from all apps. You'll probably like this.
+    name = suppress-maximize-events
+    match:class = .*
+
+    suppress_event = maximize
+}
+
+windowrule {
+    # Fix some dragging issues with XWayland
+    name = fix-xwayland-drags
+    match:class = ^$
+    match:title = ^$
+    match:xwayland = true
+    match:float = true
+    match:fullscreen = false
+    match:pin = false
+
+    no_focus = true
+}
+
+# Hyprland-run windowrule
+windowrule {
+    name = move-hyprland-run
+
+    match:class = hyprland-run
+
+    move = 20 monitor_h-120
+    float = yes
+}

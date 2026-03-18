@@ -1,0 +1,172 @@
+@import "theme.css";
+
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  /*font-family: JetBrainsMono Nerd Font;*/
+  /*font-family: Maple Mono NF;*/
+  /*font-family: Osaka-Sans Serif;*/
+  font-family: URW Gothic;
+  font-size: 18px;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0.7);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  border-radius: 5px;
+  transition-duration: 0.5s;
+  margin: 16px 16px;
+}
+
+#mpris, #clock {
+  margin-top: 3px;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#window {
+  /* border-radius: 20px; */
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+ /* color: #64727d;*/
+}
+
+#battery.warning { 
+  background-color: transparent;
+  color: @warning; 
+}
+
+#battery.critical { 
+  background-color: transparent;
+  color: @critical; 
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#bluetooth,
+#custom-hyprPicker {
+  padding-right: 10px;
+  color: @main;
+}
+
+#window {
+  margin: 0 4px;
+  border-radius: 7.8px;
+}
+
+#custom-launcher {
+  color: @main;
+}
+
+#pulseaudio,
+#backlight,
+#battery,
+#temperature,
+#bluetooth,
+#clock,
+#network,
+#memory,
+#mpris,
+#battery.charging,
+#battery.full,
+#battery.plugged {
+  color: @main;
+}
+
+#mpris.paused {
+  color: #aaaaaa;
+}
+
+#custom-pips,
+#custom-peps {
+  color: @main;
+}
+
+#battery.critical:not(.charging) {
+  color: #bf616a;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#bluetooth.disconnected {
+  color: #f53c3c;
+}
+
+#bluetooth.off {
+  color: @warning;
+}
+
+#network.disconnected {
+  color: #f53c3c;
+}
+
+#temperature.critical {
+  color: #eb4d4b;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+  background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+  background-color: #ecf0f1;
+  color: #2d3436;
+}
+
+#language {
+  background: #00b093;
+  color: #740864;
+  padding: 0 5px;
+  margin: 0 5px;
+  min-width: 16px;
+}
+
+#keyboard-state {
+  background: #97e1ad;
+  color: #000000;
+  padding: 0 0px;
+  margin: 0 5px;
+  min-width: 16px;
+}
+
+#keyboard-state > label {
+  padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+tooltip label {
+  padding: 0px;
+}
+
+tooltip box {
+  margin: 0px;
+}

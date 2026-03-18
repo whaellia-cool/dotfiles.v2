@@ -1,0 +1,133 @@
+{
+    "position": "bottom",
+    "height": 40, // Waybar height (to be removed for auto height)
+    "layer": "top", // Waybar at top layer
+    "margin-top": 0,
+    "margin-left": 10,
+    "margin-bottom": 5,
+    "margin-right": 10,
+    "spacing": 5, 
+    "modules-left": ["custom/launcher"],
+    // "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "battery", "clock"], 
+    "modules-center": ["mpris"],
+    "modules-right": ["tray", "clock", "battery"],
+    "hyprland/window": {
+        "format": "{}"
+    },
+
+    "custom/pips": {
+      "format": " ",
+      "on-click": "playerctl previous",
+      "tooltip": false
+    },
+	  "mpris": {
+      "format": "{title} — {artist}",
+      "format-paused": "{title} — {artist}",
+      "tooltip-format": "Playing: {title} — {artist}",
+      "tooltip-format-paused": "Paused: {title} — {artist}",
+      "max-length": 60
+    },
+    "custom/peps": {
+      "format": " ",
+      "on-click": "playerctl next",
+      "tooltip": false
+    },
+
+    "tray": {
+        "spacing": 10
+    },
+    
+    "clock": {
+        //"format-alt": "<span color='#6495ED'> </span>{:%a %b %d}",
+        //"format": "<span color='#6495ED'>  </span>{:%I:%M %p}",
+
+        "format-alt": "{:%a %b %d}",
+        "format": "{:%I:%M%p}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format":"  {used:0.1f}G",
+        "max-length": 10,
+        "tooltip-format": "{}%"
+    },
+
+    "temperature": {
+	  	"thermal-zone": 9,
+		  "critical-threshold": 90,
+	  	"interval": 5,
+		  "format-critical": "󰀦 {temperatureC}°C",
+		  "format": "{icon} {temperatureC}°C",
+		  "format-icons": [
+		  	"󱃃", "󰔏", "󱃂"
+		  ],
+	  	"min-length": 6,
+		  "max-length": 6
+	  },
+
+    "network": {
+        "format-wifi": "󰤨 ",
+        "format-ethernet": " ",
+        "format-disconnected": "󰤮 ",
+        "on-click": "kitty impala",
+        "tooltip-format": "{signalStrength}%"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "",
+        "format-bluetooth-muted": " ",
+        "format-muted": " ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "tooltip-format": "{volume}%",
+        "on-click": "kitty wiremix"
+    },
+
+    "bluetooth": {
+        "on-click": "kitty bluetui",
+        "format": "",
+        "tooltip-format": "{status}"
+    },
+
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "max-length": 20,
+        "format": "{icon} {capacity}%",
+        "format-warning": "{icon} {capacity}%",
+        "format-critical": "{icon} {capacity}%",
+        "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
+        "format-plugged": " ",
+        "format-alt": "{icon} {time}",
+        "format-full": " ",
+        "format-icons": [" ", " ", " ", " ", " "],
+        "tooltip-format": "Battery: {capacity}%",
+        "tooltip-format-warning": "Battery low: {capacity}%",
+        "tooltip-format-critical": "Battery critical: {capacity}%",
+        "tooltip-format-charging": "Charging: {capacity}%",
+        "tooltip-format-full": "Battery full",
+        "events": {
+            "on-discharging-warning": "dunstify 'Low Battery' && paplay ~/.config/hypr/sounds/battery-caution.oga",
+            "on-discharging-critical": "dunstify 'Low Battery' -u critical && paplay ~/.config/hypr/sounds/battery-caution.oga",
+            "on-full": "notify-send 'Rawr!!!'"
+        }
+    },
+
+    "custom/launcher": {
+        "format": "  <span font='22'></span> ", /**/
+        "on-click": "wofi --show drun",
+        "tooltip": false
+    }
+}

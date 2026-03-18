@@ -1,0 +1,42 @@
+* {
+  font-family: URW Gothic;
+  color: #e5e9f0;
+  background: transparent;
+  border-radius: 5px;
+}
+
+#window {
+  background: rgba(0,0,0,0.8);
+  margin: auto;
+  padding: 5px;
+}
+
+#img {
+  margin-right: 6px;
+}
+
+#entry {
+  padding: 10px;
+}
+
+#entry:selected {
+  background: rgba(255, 255, 255, 0.05);
+  outline:none;
+  border-radius: 0px;
+}
+
+#input {
+  border-radius: 0px;
+  margin: 3px;
+  border: none;
+}
+
+#input:focus {
+  outline: none;                           /* <-- this kills the outline/glow when typing/focused */
+  border: none;                            /* extra sure no border sneaks in */
+  box-shadow: none; 
+}
+
+#text {
+  margin: 2px;
+}

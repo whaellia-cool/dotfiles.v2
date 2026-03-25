@@ -31,3 +31,4 @@ NEW_FILENAME="${NEW_WALL##*/}"
 swww img "$HOME/.config/hypr/Pupsiki/$NEW_FILENAME" --transition-type wipe --transition-duration 0.4 --transition-fps 90 --transition-step 180 -o eDP-1
 echo "$NEW_FILENAME" > "$LASTPATH"
 
+echo "\$wallpaper = $HOME/.config/hypr/Pupsiki/$(cat ~/.last_wallpaper)" > ~/.config/hypr/hyprlock_wallpaper.conf

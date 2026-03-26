@@ -1,40 +1,32 @@
 {
     "position": "bottom",
-    "height": 40, // Waybar height (to be removed for auto height)
-    "layer": "top", // Waybar at top layer
+    "height": 35,
+    "layer": "top",
     "margin-top": 0,
     "margin-left": 10,
     "margin-bottom": 5,
     "margin-right": 10,
     "spacing": 5, 
     "modules-left": ["custom/launcher"],
-    // "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "battery", "clock"], 
     "modules-center": ["mpris"],
     "modules-right": ["tray", "clock", "battery"],
     "hyprland/window": {
         "format": "{}"
     },
 
-    "custom/pips": {
-      "format": " ",
-      "on-click": "playerctl previous",
-      "tooltip": false
-    },
 	  "mpris": {
-      "format": "{title} — {artist}",
-      "format-paused": "{title} — {artist}",
-      "tooltip-format": "Playing: {title} — {artist}",
-      "tooltip-format-paused": "Paused: {title} — {artist}",
+      //"player": "mpd",
+      "format": "{title}",
+      "format-paused": "{title}",
+      "tooltip-format": "{artist} — {title}",
+      "tooltip-format-paused": "Paused: {artist} — {title}",
       "max-length": 60
-    },
-    "custom/peps": {
-      "format": " ",
-      "on-click": "playerctl next",
-      "tooltip": false
     },
 
     "tray": {
-        "spacing": 10
+        "spacing": 10,
+        "icon-size": 22,
+        "expand": true
     },
     
     "clock": {

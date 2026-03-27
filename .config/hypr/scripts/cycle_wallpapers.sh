@@ -3,8 +3,8 @@
 DIR="$HOME/.config/hypr/Pupsiki"
 LASTPATH="$HOME/.last_wallpaper"
 
-if ! swww query >/dev/null 2>&1; then
-    swww-daemon &
+if ! awww query >/dev/null 2>&1; then
+    awww-daemon &
     # Give it a second to create the socket
     sleep 1
 fi
@@ -28,7 +28,7 @@ done
 NEW_WALL="${WALLPAPERS[$NEXT_INDEX]}"
 NEW_FILENAME="${NEW_WALL##*/}"
 
-swww img "$HOME/.config/hypr/Pupsiki/$NEW_FILENAME" --transition-type wipe --transition-duration 0.4 --transition-fps 90 --transition-step 180 -o eDP-1
+awww img "$HOME/.config/hypr/Pupsiki/$NEW_FILENAME" --transition-type wipe --transition-duration 0.4 --transition-fps 90 --transition-step 180 -o eDP-1
 echo "$NEW_FILENAME" > "$LASTPATH"
 
 echo "\$wallpaper = $HOME/.config/hypr/Pupsiki/$(cat ~/.last_wallpaper)" > ~/.config/hypr/hyprlock_wallpaper.conf
